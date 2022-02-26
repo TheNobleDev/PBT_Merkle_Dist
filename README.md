@@ -24,8 +24,8 @@
 
 1. Go to `step3_contract` folder
 2. Deploy the PBTDistributor contract in `PBTDistributor.sol` file
-3. It takes 2 inputs:
-	```address _pbt: the address of the PBT token```
+3. It takes 2 inputs:  
+	```address _pbt: the address of the PBT token```  
 	```bytes32 _merkleRoot: the merkle root generated in the previous step```
 4. Note down the address of the contract deployed.
 
@@ -33,9 +33,9 @@
 
 1. Go to `step4_frontend` folder
 2. Modify `config.ts:L9` with exact config from `step2_generator/result_combined.json`
-3. Update the environment variables  in`.env.local`, namely:
-	NEXT_PUBLIC_CONTRACT_ADDRESS : the address of the PBTDistributor contract
-	NEXT_PUBLIC_RPC_NETWORK : the network id ("4" for rinkeby, "1" for mainnet)
+3. Update the environment variables  in`.env.local`, namely:  
+	```NEXT_PUBLIC_CONTRACT_ADDRESS : the address of the PBTDistributor contract```  
+	```NEXT_PUBLIC_RPC_NETWORK : the network id ("4" for rinkeby, "1" for mainnet)```  
 4. Run `npm install`
 5. Run `npm run dev` to run development build
 6. Majority of the code that's needed is in the file: `step4_frontend\state\token.ts`
