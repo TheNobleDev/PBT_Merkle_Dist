@@ -1,0 +1,10 @@
+{
+  "provider": "https://eth-mainnet.alchemyapi.io/v2/qcE7C3TM9Pd0BRZuZNj32BkE5Hdk6h-P",
+  "contractAddress": "0x6810e776880C02933D47DB1b9fc05908e5386b96",
+  "fromBlock": "3557596",
+  "toBlock": "3559896",
+  "blocksPerBatch": 2000,
+  "delay": 10,
+  "checkIfContract": "yes",
+  "totalPBTToAllot": "100"
+}
