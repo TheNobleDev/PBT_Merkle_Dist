@@ -1,5 +1,6 @@
 "use strict";
 
+const Config = require("../config").getConfig();
 const FileHelper = require("../file-helper");
 const Parameters = require("../parameters").get();
 
@@ -17,7 +18,12 @@ module.exports.tryBlockByBlock = async (contract, start, end, symbol) => {
     counter++;
     console.log("%d% Block %d of %d", Math.floor((counter / (end - start)) * 100), i, end);
 
-    const pastEvents = await contract.getPastEvents("Transfer", { fromBlock: i, toBlock: i });
+    let pastEvents;
+    if(Config.tokenType == "ERC20") {
+      pastEvents = await contract.getPastEvents("Transfer", { fromBlock: i, toBlock: i });
+    } else if(Config.tokenType == "ERC1155") {
+      pastEvents = await contract.getPastEvents("TransferSingle", { fromBlock: i, toBlock: i });
+    }
 
     if (pastEvents.length) {
       console.info("Successfully imported ", pastEvents.length, " events");

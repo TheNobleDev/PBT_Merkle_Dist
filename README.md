@@ -4,7 +4,10 @@
 
 1. Go to `step1_snapshot` folder
 2. Edit the following variables in the `snapshot.config.json` file:
-	toBlock : the block for which snapshot is needed
+	contractAddress : token address
+	tokenType : "ERC20" or "ERC1155"
+	fromBlock : the start block for snapshot
+	toBlock : the end block for snapshot
 	totalPBTToAllot : total number PBT to give to GNO holders
 3. Run `npm install`
 4. Run `node index.js`

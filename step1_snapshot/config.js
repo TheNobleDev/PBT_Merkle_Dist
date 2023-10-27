@@ -27,6 +27,7 @@ module.exports.getConfig = () => {
     const contents = fs.readFileSync(Parameters.configFileName);
     return JSON.parse(contents);
   } catch (e) {
+    console.log(e);
     console.error("Configuration file was not found.");
   }
 };

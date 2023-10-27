@@ -29,7 +29,12 @@ const groupBy = (objectArray, property) => {
 
 const tryGetEvents = async (start, end, symbol) => {
   try {
-    const pastEvents = await Contract.getPastEvents("Transfer", { fromBlock: start, toBlock: end });
+    let pastEvents;
+    if(Config.tokenType == "ERC20") {
+      pastEvents = await Contract.getPastEvents("Transfer", { fromBlock: start, toBlock: end });
+    } else if(Config.tokenType == "ERC1155") {
+      pastEvents = await Contract.getPastEvents("TransferSingle", { fromBlock: start, toBlock: end });
+    }
 
     if (pastEvents.length) {
       console.info("Successfully imported ", pastEvents.length, " events");
@@ -48,15 +53,27 @@ const tryGetEvents = async (start, end, symbol) => {
       }
     }
   } catch (e) {
+    console.log(e)
     console.log("Could not get events due to an error. Now checking block by block.");
     await BlockByBlock.tryBlockByBlock(Contract, start, end, symbol);
   }
 };
 
 module.exports.get = async () => {
-  const name = await Contract.methods.name().call();
-  const symbol = await Contract.methods.symbol().call();
-  const decimals = await Contract.methods.decimals().call();
+  let name;
+  let symbol;
+  let decimals;
+
+  if(Config.tokenType == "ERC20") {
+    name = await Contract.methods.name().call();
+    symbol = await Contract.methods.symbol().call();
+    decimals = await Contract.methods.decimals().call();
+  } else if(Config.tokenType == "ERC1155") {
+    name = Contract.address;
+    symbol = Contract.address;
+    decimals = 1;
+  }
+
   const blockHeight = await web3.eth.getBlockNumber();
   var fromBlock = parseInt(Config.fromBlock) || 0;
   const blocksPerBatch = parseInt(Config.blocksPerBatch) || 0;

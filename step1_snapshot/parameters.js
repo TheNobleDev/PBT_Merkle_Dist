@@ -20,6 +20,11 @@ const parameters = {
     },
     {
       type: "input",
+      name: "tokenType",
+      message: "Enter the token type (ERC20/ERC1155)"
+    },
+    {
+      type: "input",
       name: "fromBlock",
       message: "Enter the block number to start from",
       default: 0
