@@ -33,7 +33,9 @@ const tryGetEvents = async (start, end, symbol) => {
     if(Config.tokenType == "ERC20") {
       pastEvents = await Contract.getPastEvents("Transfer", { fromBlock: start, toBlock: end });
     } else if(Config.tokenType == "ERC1155") {
-      pastEvents = await Contract.getPastEvents("TransferSingle", { fromBlock: start, toBlock: end });
+      let pastEvents1 = await Contract.getPastEvents("TransferSingle", { fromBlock: start, toBlock: end });
+      let pastEvents2 = await Contract.getPastEvents("TransferBatch", { fromBlock: start, toBlock: end });
+      pastEvents = pastEvents1.concat(pastEvents2);
     }
 
     if (pastEvents.length) {
