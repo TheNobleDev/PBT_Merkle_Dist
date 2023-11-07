@@ -67,13 +67,20 @@ module.exports.get = async () => {
   let decimals;
 
   if(Config.tokenType == "ERC20") {
-    name = await Contract.methods.name().call();
-    symbol = await Contract.methods.symbol().call();
-    decimals = await Contract.methods.decimals().call();
+    try {
+      name = await Contract.methods.name().call();
+      symbol = await Contract.methods.symbol().call();
+      decimals = await Contract.methods.decimals().call();
+    } catch (errr) {
+      name = Contract.address;
+      symbol = Contract.address;
+      decimals = 0;
+    }
+
   } else if(Config.tokenType == "ERC1155") {
     name = Contract.address;
     symbol = Contract.address;
-    decimals = 1;
+    decimals = 0;
   }
 
   const blockHeight = await web3.eth.getBlockNumber();
