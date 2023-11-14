@@ -32,6 +32,7 @@ const getMinimalERC20 = pastEvents => {
   return pastEvents.map(tx => {
     return {
       transactionHash: tx.transactionHash,
+      blockNumber: tx.blockNumber,
       from: tx.returnValues["0"],
       to: tx.returnValues["1"],
       value: tx.returnValues["2"]._hex
@@ -45,6 +46,7 @@ const getMinimalERC1155 = pastEvents => {
     if(tx.event == "TransferBatch") {
       return {
         transactionHash: tx.transactionHash,
+        blockNumber: tx.blockNumber,
         from: tx.returnValues["1"],
         to: tx.returnValues["2"],
         value: sumHexValues(tx.returnValues["4"])
@@ -53,6 +55,7 @@ const getMinimalERC1155 = pastEvents => {
     } else {
       return {
         transactionHash: tx.transactionHash,
+        blockNumber: tx.blockNumber,
         from: tx.returnValues["1"],
         to: tx.returnValues["2"],
         value: tx.returnValues["4"]._hex
