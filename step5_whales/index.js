@@ -24,7 +24,7 @@ for (var i = 0; i < data.length; i++) {
 	}
 
 	let address = elements[0].slice(1, -1).toLowerCase();
-	let pbtAmtString = elements[elements.length-1].slice(1, -1);
+	let pbtAmtString = elements[elements.length-1].slice();
 
 	pbtAmtString = BigNumber(pbtAmtString).toString(10);
 	let pbtAmtNum = BigNumber(pbtAmtString).toNumber();
